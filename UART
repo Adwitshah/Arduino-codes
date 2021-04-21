@@ -1,0 +1,29 @@
+Master code for Arduino to Arduino communication using UART:-
+
+
+char mystr[10] = "Adwit"; //String data
+
+void setup() {
+  // Begin the Serial at 9600 Baud
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.write(mystr,10); //Write the serial data
+  delay(1000);
+}
+
+Slave code for Arduino to Arduino communication using UART:-
+
+
+char mystr[10]; //Initialized variable to store recieved data
+
+void setup() {
+  Serial.begin(9600); // Begin the Serial at 9600 Baud
+}
+
+void loop() {
+  Serial.readBytes(mystr,10); //Read the serial data and store in var
+  Serial.println(mystr); //Print data on Serial Monitor ("println" is specially for printing characters)
+  delay(1000);
+}
