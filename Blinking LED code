@@ -1,0 +1,14 @@
+void setup() 
+{
+  
+  pinMode(10, OUTPUT); //output arduino terminal which is connected to LED
+  
+} 
+
+void loop(){
+  
+  digitalWrite(10, HIGH); // High signal given (LED starts glowing)
+  delay(1000);
+  digitalWrite(10, LOW);  // Low signal given (LED stops glowing)
+  delay(1000);
+}
