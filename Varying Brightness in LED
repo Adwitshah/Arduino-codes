@@ -1,0 +1,18 @@
+int Brightness = 0, i = 0;
+  void setup()
+{
+  pinMode(13, OUTPUT);
+}
+
+void loop()
+{
+  for (Brightness=0; Brightness <=300; Brightness+=5){
+    analogWrite(13, Brightness);
+    delay(50);
+  }
+  
+  for (Brightness=300;Brightness >=0; Brightness-=5){
+    analogWrite(13, Brightness);
+    delay(50);
+  }
+}
