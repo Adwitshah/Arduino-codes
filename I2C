@@ -1,0 +1,53 @@
+Master code for Arduino to Arduino communication using I2C:-
+
+
+#include <Wire.h> // library for I2C in Arduino
+int x = 0; // initialising variable x as 0
+void setup() {
+
+  Wire.begin(); // Starts the I2C Bus as Master
+}
+
+void loop() {
+  Wire.beginTransmission(9); // transmit to device #9 (address of slave)
+  Wire.write(x);              // sends value x to the address of slave 
+  Wire.endTransmission();    // stop transmitting values of x
+  x++; // Increment x
+  if (x > 5) x = 0; // reset x once it gets 6
+  delay(500); // there will be a 500 milli-second gap while sending values of x from 1 to 5
+}
+
+Slave code for Arduino to Arduino communication using I2C:-
+
+
+#include <Wire.h> // library for I2C in Arduino
+int LED = 13; // initialising LED
+int x = 0; // initialising variable x
+void setup() {
+
+pinMode (LED, OUTPUT);  // Define the LED pin as Output
+
+  
+  Wire.begin(9); // Start the I2C Bus as Slave on address 9 (starts hearing from the bus)
+
+  Wire.onReceive(receiveEvent);   // Attach a function to trigger when something is received
+}
+void receiveEvent(int bytes) {
+  x = Wire.read();    // read one character from the I2C
+}
+void loop() {
+  //If value received is 0 blink LED for 200 ms
+  if (x == 0) {
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);
+    delay(200);
+  }
+  //If value received is 3 blink LED for 400 ms
+  if (x == 3) {
+    digitalWrite(LED, HIGH);
+    delay(400);
+    digitalWrite(LED, LOW);
+    delay(400);
+  }
+}
